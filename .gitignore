@@ -1,0 +1,19 @@
+# Terraform files & folders
+**/.terraform
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/.terraform.*
+**/decorators
+**/local_files
+
+# Other 
+**/*_BK
+**/.DS_Store
+**/Icon*
+**/crash.log
+
+# Ignoring
+!.gitignore
+!.pre-commit-config.yaml
+!.github
+
