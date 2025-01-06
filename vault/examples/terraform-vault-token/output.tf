@@ -28,11 +28,11 @@ output "token_renewable" {
 }
 
 output "token_wrapped_token" {
-  value = module.terraform-vault-token.token_wrapped_token
- sensitive = true
+  value     = module.terraform-vault-token.token_wrapped_token
+  sensitive = true
 }
 
 output "token_wrapping_accessor" {
-  value = module.terraform-vault-token.token_wrapping_accessor
+  value     = module.terraform-vault-token.token_wrapping_accessor
   sensitive = true
 }

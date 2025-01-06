@@ -28,11 +28,11 @@ output "token_renewable" {
 }
 
 output "token_wrapped_token" {
-  value = vault_token.this.wrapped_token
+  value     = vault_token.this.wrapped_token
   sensitive = true
 }
 
 output "token_wrapping_accessor" {
-  value = vault_token.this.wrapping_accessor
+  value     = vault_token.this.wrapping_accessor
   sensitive = true
 }

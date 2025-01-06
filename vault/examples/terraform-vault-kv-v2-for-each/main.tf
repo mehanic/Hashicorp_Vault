@@ -1,6 +1,6 @@
 module "terraform-vault-kv-v2-for-each" {
-  source  = "../../modules/terraform-vault-kv-v2-for-each"
-  
+  source = "../../modules/terraform-vault-kv-v2-for-each"
+
   secrets = {
     secret1 = {
       cas = 0
@@ -10,7 +10,7 @@ module "terraform-vault-kv-v2-for-each" {
       }
       metadata = {
         description = "Credentials for the admin user"
-        tags = ["dev", "admin"]
+        tags        = ["dev", "admin"]
       }
     }
     secret2 = {
@@ -21,7 +21,7 @@ module "terraform-vault-kv-v2-for-each" {
       }
       metadata = {
         description = "API key and token for the application"
-        tags = ["prod", "api"]
+        tags        = ["prod", "api"]
       }
     }
     secret3 = {
@@ -31,7 +31,7 @@ module "terraform-vault-kv-v2-for-each" {
       }
       metadata = {
         description = "Database connection string"
-        tags = ["prod", "db"]
+        tags        = ["prod", "db"]
       }
     }
   }

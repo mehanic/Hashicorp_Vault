@@ -8,9 +8,9 @@ variable "mount_path" {
 variable "secrets" {
   description = "Map of secrets to store in Vault along with metadata"
   type = map(object({
-    cas         = number
-    data        = map(string)
-    metadata    = object({
+    cas  = number
+    data = map(string)
+    metadata = object({
       description = string
       tags        = list(string)
     })
@@ -24,7 +24,7 @@ variable "secrets" {
       }
       metadata = {
         description = "Credentials for the admin user"
-        tags = ["dev", "admin"]
+        tags        = ["dev", "admin"]
       }
     }
     secret2 = {
@@ -35,7 +35,7 @@ variable "secrets" {
       }
       metadata = {
         description = "API key and token for the application"
-        tags = ["prod", "api"]
+        tags        = ["prod", "api"]
       }
     }
     secret3 = {
@@ -45,7 +45,7 @@ variable "secrets" {
       }
       metadata = {
         description = "Database connection string"
-        tags = ["prod", "db"]
+        tags        = ["prod", "db"]
       }
     }
   }

@@ -1,7 +1,7 @@
 variable "kv_path" {
   description = "Path where the secrets KV store is mounted."
   //default     = "secrets"
-  default     = "secret"
+  default = "secret"
 }
 
 variable "owner" {
