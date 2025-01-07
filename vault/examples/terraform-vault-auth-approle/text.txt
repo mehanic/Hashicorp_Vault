@@ -1,0 +1,69 @@
+module "terraform-vault-auth-approle" {
+  source             = "../../modules/terraform-vault-auth-approle"
+  approle_mount_accessor = vault_auth_backend.approle.accessor
+  approle_mount_path     = vault_auth_backend.approle.path
+  approles               = var.approles
+
+  
+
+}
+
+resource "vault_auth_backend" "approle" {
+  type = "approle"
+}
+
+# module "approles" {
+#   source                 = "./auth_approle"
+#   approle_mount_accessor = vault_auth_backend.approle.accessor
+#   approle_mount_path     = vault_auth_backend.approle.path
+#   approles               = var.approles
+# }
+
+resource "vault_identity_group" "approle" {
+  #for_each  = { for k, approle in distinct(flatten(try(local.approles[*].groups, []))) : approle => approle }
+  for_each          = { for group in var.groups : group.name => group }
+  member_entity_ids = [for entry in var.approles : module.approles.approle_identities[entry.role_name] if contains(entry.groups == null ? [] : entry.groups, each.value.name)]
+  name              = each.value.name
+  type              = "internal"
+  policies          = each.value.policies
+}
+
+variable "approles" {
+  type = list(object({
+    role_name             = string
+    role_id               = optional(string)
+    token_policies        = optional(list(string))
+    token_max_ttl         = optional(number)
+    token_ttl             = optional(number)
+    token_bound_cidrs     = optional(list(string))
+    secret_id_ttl         = optional(number)
+    secret_id_num_uses    = optional(number)
+    secret_id_bound_cidrs = optional(list(string))
+    identity_metadata     = optional(map(string))
+    groups                = optional(list(string))
+  }))
+}
+
+
+
+resource "vault_auth_backend" "approle" {
+  type = "approle"
+}
+
+module "vault_auth_approle" {
+  source                  = "../../modules/terraform-vault-auth-approle"
+  approle_mount_accessor  = vault_auth_backend.approle.accessor
+  approle_mount_path      = vault_auth_backend.approle.path
+  approles                = var.approles
+}
+
+resource "vault_identity_group" "approle_groups" {
+  for_each = { for role in var.approles : role.role_name => role }
+  name     = each.key
+  type     = "internal"
+  policies = each.value.token_policies
+  member_entity_ids = [
+    for entry in module.vault_auth_approle.approle_identities[each.value.role_name] : 
+    entry if contains(each.value.groups, each.key)
+  ]
+}
