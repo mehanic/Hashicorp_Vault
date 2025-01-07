@@ -50,14 +50,14 @@ variable "approles" {
       groups                 = ["web-servers"]
     },
     {
-      role_name              = "db_server"
-      token_policies         = ["db_policy"]
-      token_max_ttl          = 172800
-      token_ttl              = 14400
-      secret_id_ttl          = 86400
-      secret_id_num_uses     = 5
-      identity_metadata      = { environment = "staging", application = "database" }
-      create_identity        = false
+      role_name          = "db_server"
+      token_policies     = ["db_policy"]
+      token_max_ttl      = 172800
+      token_ttl          = 14400
+      secret_id_ttl      = 86400
+      secret_id_num_uses = 5
+      identity_metadata  = { environment = "staging", application = "database" }
+      create_identity    = false
     }
   ]
 }
@@ -70,29 +70,29 @@ resource "vault_auth_backend" "approle" {
 }
 
 module "terraform-vault-auth-approle" {
-  source             = "../../modules/terraform-vault-auth-approle"
-#this is for manual to some existing
-# vault auth list                                                     
-# Path                 Type        Accessor                  Description                Version
-# ----                 ----        --------                  -----------                -------
-# approle/             approle     auth_approle_6d1f132c     n/a                        n/a
-#   approle_mount_accessor = "auth_approle_6d1f132c"  //auth_approle_6d1f132c
-#   approle_mount_path      = "approle"
+  source = "../../modules/terraform-vault-auth-approle"
+  #this is for manual to some existing
+  # vault auth list                                                     
+  # Path                 Type        Accessor                  Description                Version
+  # ----                 ----        --------                  -----------                -------
+  # approle/             approle     auth_approle_6d1f132c     n/a                        n/a
+  #   approle_mount_accessor = "auth_approle_6d1f132c"  //auth_approle_6d1f132c
+  #   approle_mount_path      = "approle"
   approle_mount_accessor = vault_auth_backend.approle.accessor
   approle_mount_path     = vault_auth_backend.approle.path
 
-  role_name_prefix        = "myapp-"
-  global_bound_cidrs      = ["192.168.0.0/16", "10.0.0.0/8"]
-  approles                = var.approles
+  role_name_prefix   = "myapp-"
+  global_bound_cidrs = ["192.168.0.0/16", "10.0.0.0/8"]
+  approles           = var.approles
 }
 
 resource "vault_identity_group" "approle" {
-  for_each          = { for group in var.groups : group.name => group }
+  for_each = { for group in var.groups : group.name => group }
   member_entity_ids = [
     for entry in var.approles : module.terraform-vault-auth-approle.approle_identities[entry.role_name]
     if contains(entry.groups == null ? [] : entry.groups, each.value.name)
   ]
-  name              = each.value.name
-  type              = "internal"
-  policies          = each.value.policies
+  name     = each.value.name
+  type     = "internal"
+  policies = each.value.policies
 }

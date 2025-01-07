@@ -18,9 +18,9 @@ output "approle_roles" {
   description = "The list of created AppRole roles."
   value = {
     for role in var.approles : role.role_name => {
-      role_name    = role.role_name
-      role_id      = vault_approle_auth_backend_role.approle[role.role_name].role_id
-      token_ttl    = vault_approle_auth_backend_role.approle[role.role_name].token_ttl
+      role_name     = role.role_name
+      role_id       = vault_approle_auth_backend_role.approle[role.role_name].role_id
+      token_ttl     = vault_approle_auth_backend_role.approle[role.role_name].token_ttl
       secret_id_ttl = vault_approle_auth_backend_role.approle[role.role_name].secret_id_ttl
     }
   }
@@ -41,17 +41,17 @@ output "approle_identity_aliases" {
   description = "The identity aliases created for AppRoles."
   value = {
     for role in var.approles : role.role_name => {
-      alias_id          = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].id : null
-      alias_name        = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].name : null
-      mount_accessor    = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].mount_accessor : null
-      canonical_id      = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].canonical_id : null
+      alias_id       = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].id : null
+      alias_name     = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].name : null
+      mount_accessor = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].mount_accessor : null
+      canonical_id   = lookup(vault_identity_entity_alias.approle_identity_alias, role.role_name, null) != null ? vault_identity_entity_alias.approle_identity_alias[role.role_name].canonical_id : null
     }
   }
 }
 
 output "approle_policies" {
   description = "The AppRole rotation policy created."
-  value = vault_policy.approle_rotation.name
+  value       = vault_policy.approle_rotation.name
 }
 
 output "identity_groups" {

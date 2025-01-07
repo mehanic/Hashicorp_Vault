@@ -1,10 +1,10 @@
 variable "approle_mount_path" {
-  type = string
+  type    = string
   default = "vault_auth_approle"
 }
 
 variable "approle_mount_accessor" {
-  type = string
+  type    = string
   default = "approle-mount-accessor"
 }
 variable "role_name_prefix" {
@@ -31,7 +31,7 @@ variable "approles" {
     secret_id_bound_cidrs  = optional(list(string))
     create_identity        = optional(bool)
     identity_metadata      = optional(map(string))
-   // groups                = optional(list(string))
+    // groups                = optional(list(string))
   }))
 }
 
