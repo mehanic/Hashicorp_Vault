@@ -62,15 +62,25 @@ variable "approles" {
   ]
 }
 
+
+#this is for automation
+resource "vault_auth_backend" "approle" {
+  type = "approle"
+  path = "vault_auth_approle"
+}
+
+module "terraform-vault-auth-approle" {
+  source             = "../../modules/terraform-vault-auth-approle"
+#this is for manual to some existing
 # vault auth list                                                     
 # Path                 Type        Accessor                  Description                Version
 # ----                 ----        --------                  -----------                -------
 # approle/             approle     auth_approle_6d1f132c     n/a                        n/a
+#   approle_mount_accessor = "auth_approle_6d1f132c"  //auth_approle_6d1f132c
+#   approle_mount_path      = "approle"
+  approle_mount_accessor = vault_auth_backend.approle.accessor
+  approle_mount_path     = vault_auth_backend.approle.path
 
-module "terraform-vault-auth-approle" {
-  source             = "../../modules/terraform-vault-auth-approle"
-  approle_mount_accessor = "auth_approle_6d1f132c"  //auth_approle_6d1f132c
-  approle_mount_path      = "approle"
   role_name_prefix        = "myapp-"
   global_bound_cidrs      = ["192.168.0.0/16", "10.0.0.0/8"]
   approles                = var.approles

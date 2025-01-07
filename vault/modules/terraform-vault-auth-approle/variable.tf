@@ -1,6 +1,6 @@
 variable "approle_mount_path" {
   type = string
-  default = "approle"
+  default = "vault_auth_approle"
 }
 
 variable "approle_mount_accessor" {
