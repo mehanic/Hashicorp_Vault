@@ -33,29 +33,29 @@ variable "allowed_roles" {
 variable "db_roles" {
   description = "Database roles with configuration for TTLs and privileges"
   type = list(object({
-    rolename     = string
-    privileges   = string
-    default_ttl  = number
-    max_ttl      = number
+    rolename    = string
+    privileges  = string
+    default_ttl = number
+    max_ttl     = number
   }))
   default = [
     {
-      rolename     = "application_dba"
-      privileges   = "ALL PRIVILEGES ON application.*"
-      default_ttl  = 300
-      max_ttl      = 3000
+      rolename    = "application_dba"
+      privileges  = "ALL PRIVILEGES ON application.*"
+      default_ttl = 300
+      max_ttl     = 3000
     },
     {
-      rolename     = "customer_analytics"
-      privileges   = "SELECT ON customer.*"
-      default_ttl  = 60
-      max_ttl      = 600
+      rolename    = "customer_analytics"
+      privileges  = "SELECT ON customer.*"
+      default_ttl = 60
+      max_ttl     = 600
     },
     {
-      rolename     = "customer_dba"
-      privileges   = "ALL PRIVILEGES ON customer.*"
-      default_ttl  = 300
-      max_ttl      = 3000
+      rolename    = "customer_dba"
+      privileges  = "ALL PRIVILEGES ON customer.*"
+      default_ttl = 300
+      max_ttl     = 3000
     }
   ]
 }

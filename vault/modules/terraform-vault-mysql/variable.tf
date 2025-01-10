@@ -1,7 +1,7 @@
 variable "roles" {
   type        = any
   description = "Roles"
-  default =  [
+  default = [
     {
       role_name : "role-db-1"
       database_name : "db-1"
@@ -57,19 +57,19 @@ variable "allowed_roles" {
 variable "db_url" {
   type        = string
   description = "A URL containing connection information. See the Vault docs for an example."
-  default = "127.0.0.1:3306"
+  default     = "127.0.0.1:3306"
 }
 
 variable "db_username" {
   type        = string
   description = "The database VAULT ADMIN username to authenticate with"
-  default = "root"
+  default     = "root"
 }
 
 variable "db_password" {
   type        = string
   description = "The database VAULT ADMIN password to authenticate with"
-  default = "new_password"
+  default     = "new_password"
 
 }
 
