@@ -7,13 +7,13 @@ output "approle_accessor_map" {
 }
 
 output "approle_wrapping_accessor" {
-  value = module.terraform-vault-approle-secret-id.approle_wrapping_accessor
-  sensitive   = true
+  value     = module.terraform-vault-approle-secret-id.approle_wrapping_accessor
+  sensitive = true
 }
 
 output "approle_wrapping_token" {
-  value = module.terraform-vault-approle-secret-id.approle_wrapping_token
-  sensitive   = true
+  value     = module.terraform-vault-approle-secret-id.approle_wrapping_token
+  sensitive = true
 }
 
 output "approle_role_id" {
@@ -28,10 +28,10 @@ output "generated_rules" {
 
 output "audit_reader_rule" {
   description = "Audit reader rule details"
-  value = module.terraform-vault-approle-secret-id.audit_reader_rule
+  value       = module.terraform-vault-approle-secret-id.audit_reader_rule
 }
 
 output "audit_manager_rule" {
   description = "Audit manager rule details"
-  value = module.terraform-vault-approle-secret-id.audit_manager_rule
+  value       = module.terraform-vault-approle-secret-id.audit_manager_rule
 }

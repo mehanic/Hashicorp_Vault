@@ -41,13 +41,13 @@ variable "policy_document" {
 
 variable "default_sts_ttl" {
   description = "Default TTL for STS credentials."
-  type = number
+  type        = number
   default     = 3600
 }
 
 variable "max_sts_ttl" {
   description = "Maximum TTL for STS credentials."
-  type = number
+  type        = number
   default     = 7200
 }
 

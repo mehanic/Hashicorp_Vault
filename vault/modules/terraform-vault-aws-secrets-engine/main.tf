@@ -4,14 +4,14 @@ resource "vault_aws_secret_backend" "aws_backend" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
   region     = var.aws_region
-  path         = "aws_first"
+  path       = "aws_first"
 
   default_lease_ttl_seconds = var.aws_default_lease
   max_lease_ttl_seconds     = var.aws_max_lease
 }
 
 resource "vault_aws_secret_backend_role" "aws_backend_role" {
-  name  = var.aws_backend_role_name
+  name = var.aws_backend_role_name
 
   backend         = vault_aws_secret_backend.aws_backend.path
   credential_type = var.aws_backend_role_cred_type

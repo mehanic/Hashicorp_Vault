@@ -12,7 +12,7 @@ variable "name" {
   description = "Name of the role in Vault"
   //type    = map(string)
   default = "aws-vault"
-    
+
 }
 
 variable "named_rules" {
@@ -31,13 +31,13 @@ variable "rules" {
   }))
   default = [
     {
-      path               = "secret/data/team/*"
-      capabilities       = ["read", "list"]
-      description        = "Read and list secrets for the team"
+      path         = "secret/data/team/*"
+      capabilities = ["read", "list"]
+      description  = "Read and list secrets for the team"
       allowed_parameters = {
         "ttl" = ["30m", "1h"]
       }
-      denied_parameters  = {
+      denied_parameters = {
         "max_ttl" = ["2h"]
       }
     },

@@ -6,7 +6,7 @@ output "vault_policy_name" {
 
 output "aws_auth_backend_roles" {
   description = "The roles created in the AWS Auth Backend"
-  value       = {
+  value = {
     for key, role in vault_aws_auth_backend_role.role :
     key => {
       backend                  = role.backend

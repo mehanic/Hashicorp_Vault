@@ -1,19 +1,19 @@
 module "terraform-vault-approle-secret-id" {
   source = "../../modules/terraform-vault-approle-secret-id"
- backend_paths = {
-  approle = "approle-vault"
-}
+  backend_paths = {
+    approle = "approle-vault"
+  }
 
-name = "aws-vault"
+  name = "aws-vault"
 
-named_rules = []
+  named_rules = []
 
-rules = []
+  rules = []
 
-token_ttl = 72000
-token_max_ttl = 72000
-wrapping_ttl = 3600
+  token_ttl     = 72000
+  token_max_ttl = 72000
+  wrapping_ttl  = 3600
 
-enable_approle_login = true
+  enable_approle_login = true
 
 }

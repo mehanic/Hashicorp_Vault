@@ -1,9 +1,9 @@
 # Variables for AWS secrets engine configuration
 
 variable "aws_path" {
- type = string
- default = "aws_new"
- description = "aws name for preserving keys"
+  type        = string
+  default     = "aws_new"
+  description = "aws name for preserving keys"
 }
 
 variable "aws_access_key" {
@@ -49,10 +49,10 @@ variable "aws_backend_role_cred_type" {
 
   validation {
     condition = can(contains(
-    [
-      "iam_user",
-      "assumed_role",
-      "federation_token"
+      [
+        "iam_user",
+        "assumed_role",
+        "federation_token"
     ], var.aws_backend_role_cred_type))
     error_message = "Invalid credential type. Must be one of iam_user, assumed_role, or federation_token."
   }

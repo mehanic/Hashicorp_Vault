@@ -11,7 +11,7 @@ variable "name" {
   description = "Name of the role in Vault"
   //type    = map(string)
   default = "aws-vault"
-    
+
 }
 
 variable "named_rules" {

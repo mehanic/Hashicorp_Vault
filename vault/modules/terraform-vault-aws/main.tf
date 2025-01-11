@@ -1,7 +1,7 @@
 
 resource "vault_auth_backend" "aws" {
   type        = "aws"
-  path        = var.backend_paths["aws"]  # Use dynamic path
+  path        = var.backend_paths["aws"] # Use dynamic path
   description = "AWS Authentication Backend"
 }
 
@@ -9,7 +9,7 @@ resource "vault_auth_backend" "aws" {
 resource "vault_aws_auth_backend_role" "role" {
   for_each = length(var.login_role_arns) > 0 ? var.backend_paths : {}
 
-  backend                  = vault_auth_backend.aws.path  # Use correct backend path
+  backend                  = vault_auth_backend.aws.path # Use correct backend path
   role                     = each.value
   auth_type                = "iam"
   bound_iam_principal_arns = var.login_role_arns
