@@ -1,5 +1,5 @@
-module "terraform-vault-secret-ssh" {
-  source   = "../../modules/terraform-vault-secret-ssh"
+module "terraform-vault-ssh-secret" {
+  source   = "../../modules/terraform-vault-ssh-secret"
   ssh_path = "ssh"
 
   ttl = 172800 # 3600 * 24 * 2 (2 days TTL)

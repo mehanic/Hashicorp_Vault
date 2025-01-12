@@ -1,5 +1,5 @@
-module "terraform-vault-token" {
-  source         = "../../modules/terraform-vault-token"
+module "terraform-vault-approle-client-token" {
+  source         = "../../modules/terraform-vault-approle-client-token"
   token_max_time = 1800       # Maximum lifetime for generated tokens in seconds
   role           = "myrole"   # Name of the role for the use case
   policy         = "mypolicy" # Policy's name

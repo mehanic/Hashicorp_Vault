@@ -1,7 +1,7 @@
 output "this" {
-  value = vault_mount.this
+  value = module.terraform-vault-transit-backend.this
 }
 
 output "keys" {
-  value = vault_transit_secret_backend_key.this
+  value = module.terraform-vault-transit-backend.keys
 }

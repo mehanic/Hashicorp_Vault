@@ -3,7 +3,7 @@ locals {
     for k, v in g.identities : k => merge(v, { group : i, policies = g.policies })
   }]...)
   jumpcloud_cert = var.jumpcloud_ad_cert_filename == null ? "${path.module}/tls/jumpcloud.chain.pem" : var.jumpcloud_ad_cert_filename
-  test_prefix = "__test"
+  test_prefix    = "__test"
 }
 
 resource "vault_ldap_auth_backend" "this" {
@@ -71,6 +71,6 @@ resource "vault_identity_oidc_assignment" "this" {
 resource "vault_ldap_auth_backend_user" "user" {
   for_each = local.identity_map
   username = each.key
-  policies = each.value["policies"]  # Now policies are available in each.value
+  policies = each.value["policies"] # Now policies are available in each.value
   backend  = vault_ldap_auth_backend.this.path
 }

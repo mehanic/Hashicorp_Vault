@@ -7,17 +7,17 @@ variable "path" {
 }
 
 variable "jumpcloud_ad_binduid" {
-  type = string
+  type    = string
   default = "uid=adminuser,ou=Users,o=12345,dc=jumpcloud,dc=com"
 }
 
 variable "jumpcloud_ad_bindpass" {
-  type = string
+  type    = string
   default = "A@dminSecureP@ssw0rd2025!"
 }
 
 variable "jumpcloud_ad_orgid" {
-  type = string
+  type    = string
   default = "abcd1234-efgh-5678-ijkl-9876mnopqrs"
 
 }
@@ -29,12 +29,12 @@ variable "jumpcloud_ad_cert_filename" {
 
 variable "jumpcloud_group_policy" {
   type = map(object({
-    policies   : list(string)
+    policies : list(string)
     identities : map(object({
       disabled : bool
     }))
   }))
-  
+
   default = {
     __test_Engineering = {
       policies = ["__test_vault-ops", "__test_vault-identity-mgmt"]
@@ -50,10 +50,10 @@ variable "jumpcloud_group_policy" {
     }
 
     admin-group = {
-      policies   = ["admin", "ops"]
+      policies = ["admin", "ops"]
       identities = {
-        user1 = { disabled = false }  # Add missing attribute
-        user2 = { disabled = false }  # Add missing attribute
+        user1 = { disabled = false } # Add missing attribute
+        user2 = { disabled = false } # Add missing attribute
       }
     }
   }
@@ -76,8 +76,8 @@ resource "vault_policy" "vault-qa" {
 }
 
 variable "vault-qa-policy" {
-  type        = string
-  default     = <<EOT
+  type    = string
+  default = <<EOT
 # Read system health check
 path "sys/health" {
   capabilities = ["read", "sudo"]
@@ -177,7 +177,7 @@ EOT
 variable "vault-identity-mgmt_policy_content" {
   type        = string
   description = "The policy content for the vault-identity-mgmt policy"
-  default = <<EOT
+  default     = <<EOT
 path "identity/*" {
   capabilities = [ "create", "read", "update", "delete", "list" ]
 }
@@ -199,7 +199,7 @@ EOT
 variable "vault_ops_policy_content" {
   type        = string
   description = "The policy content for the vault-ops policy"
-  default = <<EOT
+  default     = <<EOT
 # Read system health check
 path "sys/health" {
   capabilities = ["read", "sudo"]

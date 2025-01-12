@@ -4,10 +4,10 @@ module "terraform-vault-ldap-auth" {
   path = "ldap"
 
   # JumpCloud AD configuration
-  jumpcloud_ad_binduid        = "uid=adminuser,ou=Users,o=12345,dc=jumpcloud,dc=com"
-  jumpcloud_ad_bindpass       = "A@dminSecureP@ssw0rd2025!"
-  jumpcloud_ad_orgid          = "abcd1234-efgh-5678-ijkl-9876mnopqrs"
-  jumpcloud_ad_cert_filename  = "../../modules/terraform-vault-ldap-auth/tls/jumpcloud.chain.pem"
+  jumpcloud_ad_binduid       = "uid=adminuser,ou=Users,o=12345,dc=jumpcloud,dc=com"
+  jumpcloud_ad_bindpass      = "A@dminSecureP@ssw0rd2025!"
+  jumpcloud_ad_orgid         = "abcd1234-efgh-5678-ijkl-9876mnopqrs"
+  jumpcloud_ad_cert_filename = "../../modules/terraform-vault-ldap-auth/tls/jumpcloud.chain.pem"
 
   # JumpCloud group policy mapping
   jumpcloud_group_policy = {

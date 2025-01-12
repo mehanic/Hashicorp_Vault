@@ -1,17 +1,18 @@
 output "renewable" {
-  value = vault_approle_auth_backend_login.login.renewable
+  value = module.terraform-vault-approle-client-token.renewable
 }
 
 output "lease-duration" {
-  value = vault_approle_auth_backend_login.login.lease_duration
+  value = module.terraform-vault-approle-client-token.lease-duration
 }
 
 output "lease-started" {
-  value = vault_approle_auth_backend_login.login.lease_started
+  value = module.terraform-vault-approle-client-token.lease-started
 }
 
 output "client-token" {
-  value = vault_approle_auth_backend_login.login.client_token
+  value     = module.terraform-vault-approle-client-token.client-token
+  sensitive = true
 }
 
 

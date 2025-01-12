@@ -1,15 +1,15 @@
-output "approle_id" {
-  description = "Approle ID"
-  value       = local.role_id
-}
+# output "approle_id" {
+#   description = "Approle ID"
+#   value       = module.terraform-vault-sops.approle_id
+# }
 
-output "approle_secret" {
-  description = "Approle Secret ID"
-  value       = vault_approle_auth_backend_role_secret_id.default.secret_id
-  sensitive   = true
-}
+# output "approle_secret" {
+#   description = "Approle Secret ID"
+#   value       = module.terraform-vault-sops.approle_secret
+#   sensitive   = true
+# }
 
-output "backend_path" {
-  description = "The Auth Backend path mounted upon"
-  value       = local.backend_path
-}
+# output "backend_path" {
+#   description = "The Auth Backend path mounted upon"
+#   value       = module.terraform-vault-sops.backend_path
+# }
