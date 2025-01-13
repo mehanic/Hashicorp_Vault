@@ -7,5 +7,5 @@ resource "vault_ldap_auth_backend" "ldap" {
   groupdn      = var.ldaps_groupdn
   insecure_tls = false
   starttls     = true
- // certificate  = file(var.ldaps_ca_file)
+  // certificate  = file(var.ldaps_ca_file)
 }

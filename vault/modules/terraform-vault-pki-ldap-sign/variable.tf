@@ -15,7 +15,7 @@ variable "ldaps_groupdn" {
 
 variable "ldaps_ca_file" {
   description = "CA certificate file for LDAPS server"
-  default = "../../modules/terraform-vault-pki-ldap-sign/my_ldap_cert.pem"
+  default     = "../../modules/terraform-vault-pki-ldap-sign/my_ldap_cert.pem"
   //openssl s_client -showcerts -connect mydc.mycompany.com:636 -servername mydc.mycompany.com </dev/null 2>/dev/null > my_ldaps_cert.pem
 
 }

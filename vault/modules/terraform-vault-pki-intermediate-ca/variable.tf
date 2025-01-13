@@ -5,7 +5,7 @@ variable "name" {
 
 variable "parent_ca" {
   type    = string
-  default = "intermediate-certificate"  //default = "root-certificate"?
+  default = "intermediate-certificate" //default = "root-certificate"?
   //vault write root-certificate/config/issuers/default issuer_ref="<issuer-ref>"   vault read root-certificate/issuers
 
 }
