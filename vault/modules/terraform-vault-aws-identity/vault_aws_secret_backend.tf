@@ -1,0 +1,1 @@
+resource "vault_aws_secret_backend" "default" {}
