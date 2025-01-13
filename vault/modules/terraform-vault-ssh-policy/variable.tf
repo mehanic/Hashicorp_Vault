@@ -25,9 +25,9 @@ variable "ttl" {
 variable "default_extensions" {
   description = "The default extensions for the SSH backend role"
   type        = map(string)
-  default     = {
+  default = {
     "permit-pty" = ""
-  }     
+  }
 }
 
 variable "default_user" {

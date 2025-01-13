@@ -8,5 +8,5 @@ output "ssh_public_key" {
 }
 
 output "ssh_backend_role_name" {
-  value = module.terraform-vault-ssh-policy.ssh_backend_role_name   
+  value = module.terraform-vault-ssh-policy.ssh_backend_role_name
 }

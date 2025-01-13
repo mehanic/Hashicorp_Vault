@@ -1,6 +1,6 @@
 resource "vault_mount" "ssh" {
-  path  = var.path
-  type  = "ssh"
+  path = var.path
+  type = "ssh"
 
   default_lease_ttl_seconds = var.default_lease
   max_lease_ttl_seconds     = var.max_lease
@@ -39,7 +39,7 @@ resource "vault_ssh_secret_backend_role" "ssh" {
   allowed_extensions       = var.ssh_allowed_extensions
   allowed_users            = var.ssh_allowed_users
 
- // allowed_user_key_lengths = var.ssh_allowed_user_key_lengths
+  // allowed_user_key_lengths = var.ssh_allowed_user_key_lengths
   default_extensions       = var.ssh_default_extensions
   default_critical_options = var.ssh_default_extensions
 

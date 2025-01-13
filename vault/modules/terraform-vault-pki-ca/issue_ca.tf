@@ -9,12 +9,12 @@ resource "vault_mount" "web_issuer_ca" {
 
 # Create a role for issuing certificates from the intermediate CA
 resource "vault_pki_secret_backend_role" "web_issuer_ca_role" {
-  backend          = vault_mount.web_issuer_ca.path
-  name             = var.web_issuer_ca_backend_role_name
-  allow_any_name   = true
-  max_ttl          = var.web_issuer_ca_max_ttl
-  ttl              = var.web_issuer_ca_ttl
-  no_store         = false
+  backend        = vault_mount.web_issuer_ca.path
+  name           = var.web_issuer_ca_backend_role_name
+  allow_any_name = true
+  max_ttl        = var.web_issuer_ca_max_ttl
+  ttl            = var.web_issuer_ca_ttl
+  no_store       = false
 }
 
 # Generate the intermediate CA CSR
@@ -26,11 +26,11 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "web_issuer_ca_csr
 
 # Sign the intermediate CA CSR with the root CA
 resource "vault_pki_secret_backend_root_sign_intermediate" "web_issuer_ca_cert" {
-  backend      = vault_mount.root_ca.path
-  csr          = vault_pki_secret_backend_intermediate_cert_request.web_issuer_ca_csr.csr
-  common_name  = var.web_issuer_ca_cert_common_name
-  format       = "pem_bundle"
-  ttl          = "43800h"
+  backend     = vault_mount.root_ca.path
+  csr         = vault_pki_secret_backend_intermediate_cert_request.web_issuer_ca_csr.csr
+  common_name = var.web_issuer_ca_cert_common_name
+  format      = "pem_bundle"
+  ttl         = "43800h"
 }
 
 # Set the signed intermediate certificate
@@ -42,7 +42,7 @@ resource "vault_pki_secret_backend_intermediate_set_signed" "web_issuer_ca_cert"
 # Configure the cluster for the intermediate CA
 resource "vault_pki_secret_backend_config_cluster" "web_issuer_ca_cluster" {
   backend  = vault_mount.web_issuer_ca.path
-  path = "${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}"
+  path     = "${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}"
   aia_path = "${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}"
 }
 
@@ -51,12 +51,12 @@ resource "vault_pki_secret_backend_config_cluster" "web_issuer_ca_cluster" {
 resource "vault_pki_secret_backend_config_urls" "web_issuer_ca_urls" {
   depends_on = [vault_mount.root_ca]
 
-  backend = vault_mount.root_ca.path
-  issuing_certificates = [ "${var.vault_address}/v1/pki/issuer/{{issuer_id}}/der" ]
-  crl_distribution_points = [ "${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}/crl/der" ]
-  ocsp_servers = [ "${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}/ocsp" ]
-  enable_templating = true
-} 
+  backend                 = vault_mount.root_ca.path
+  issuing_certificates    = ["${var.vault_address}/v1/pki/issuer/{{issuer_id}}/der"]
+  crl_distribution_points = ["${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}/crl/der"]
+  ocsp_servers            = ["${var.vault_address}/v1/${vault_mount.web_issuer_ca.path}/ocsp"]
+  enable_templating       = true
+}
 
 # Tune the intermediate CA for ACME capabilities
 resource "vault_generic_endpoint" "pki_int_tune" {

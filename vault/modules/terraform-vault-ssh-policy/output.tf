@@ -8,5 +8,5 @@ output "ssh_public_key" {
 }
 
 output "ssh_backend_role_name" {
-  value = vault_ssh_secret_backend_role.ssh_backend_role.name   
+  value = vault_ssh_secret_backend_role.ssh_backend_role.name
 }

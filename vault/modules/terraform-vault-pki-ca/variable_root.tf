@@ -4,61 +4,61 @@ variable "module_depends_on" {
 }
 
 variable "root_ca_path" {
-  type = string
+  type    = string
   default = "root_ca"
 }
 
 variable "root_ca_description" {
-  type = string
+  type    = string
   default = "Root CA"
 }
 
 variable "root_ca_role_name" {
-  type = string
+  type    = string
   default = "root_ca_role"
 }
 
 variable "root_ca_max_ttl" {
-  type = string
+  type    = string
   default = "8760h"
 }
 
 variable "root_ca_default_lease_ttl_seconds" {
-  type = number
+  type    = number
   default = 94608000
 }
 
 variable "root_ca_max_ttl_seconds" {
-  type = number
+  type    = number
   default = 94608000
 }
 
 variable "root_cert_common_name" {
-  type = string
+  type    = string
   default = "root_ca"
 }
 
 variable "root_cert_ttl" {
-  type = string
+  type    = string
   default = "315360000"
 }
 
 variable "root_ca_ou" {
-  type = string
+  type    = string
   default = "Platform"
 }
 
 variable "root_ca_organization" {
-  type = string
+  type    = string
   default = "Corp"
 }
 
 variable "vault_allowed_domains" {
-  type = list(string)
-  default = [ "corp.local" ]
+  type    = list(string)
+  default = ["corp.local"]
 }
 
 variable "vault_address" {
-  type = string
+  type    = string
   default = "https://vault.corp.local:8200"
 }

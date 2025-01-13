@@ -18,7 +18,7 @@
 variable "config_paths" {
   description = "List of paths to the configuration secrets in Vault."
   type        = list(string)
-  default  =  [
+  default = [
     "secret/data/my-config",
     "secret/data/another-config",
     "secret/data/my-app/secrets"
@@ -37,7 +37,7 @@ variable "config_policy_name" {
   description = "The name of the policy to access the configuration secrets."
   type        = string
   default     = "config-access-policy"
-} 
+}
 
 
 variable "cert_auth_role_name" {
