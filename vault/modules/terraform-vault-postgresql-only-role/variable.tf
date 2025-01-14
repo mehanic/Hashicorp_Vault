@@ -13,7 +13,7 @@ variable "backend" {
 
 variable "db_name" {
   type        = string
-  default     = "example_db"
+  default     = "postgres"
   description = "description"
 }
 

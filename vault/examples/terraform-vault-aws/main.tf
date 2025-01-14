@@ -41,6 +41,6 @@ module "terraform-vault-aws" {
   wrapping_ttl = 3600 # 1 hour
 
   # List of IAM role ARNs allowed access
-  login_role_arns = ["arn:aws:iam::123456789012:role/example-role"]
+  login_role_arns = ["arn:aws:iam::476167141852:role/vault-peter-example-role"]
 
 }

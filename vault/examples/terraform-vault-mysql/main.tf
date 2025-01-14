@@ -77,3 +77,20 @@ module "terraform-vault-mysql" {
 
 
 }
+
+# mysql -u v-role-db-1-TAwbDauM -pCBaLuGAf-eH82i23Gcuy                                                   1 (0.014s) < 21:26:22
+# mysql: [Warning] Using a password on the command line interface can be insecure.
+# Welcome to the MySQL monitor.  Commands end with ; or \g.
+# Your MySQL connection id is 44
+# Server version: 8.0.40-0ubuntu0.24.04.1 (Ubuntu)
+
+# Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+# Oracle is a registered trademark of Oracle Corporation and/or its
+# affiliates. Other names may be trademarks of their respective
+# owners.
+
+# Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+# mysql> 
+

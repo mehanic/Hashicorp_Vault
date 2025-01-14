@@ -1,7 +1,7 @@
 module "terraform-vault-postgresql-roles" {
   source = "../../modules/terraform-vault-postgresql-roles"
   # Path to create the database secrets engine for the integration
-  path = "postgresql"
+  path = "postgresql-vault-postgresql"
 
   # Description of the database secrets engine in Vault
   description = "PostgreSQL database integration for Vault"
@@ -13,10 +13,10 @@ module "terraform-vault-postgresql-roles" {
   max_lease_ttl_seconds = 86400
 
   # Backend type (postgresql-database)
-  backend = "postgresql"
+  backend = "postgresql-vault-postgresql"
 
   # The logical name of the database
-  database_name = "mydatabase"
+  database_name = "bwago_development"
 
   # Database user with privileges
   db_username = "postgres"
@@ -31,7 +31,7 @@ module "terraform-vault-postgresql-roles" {
   db_port = 5432
 
   # Database name
-  db_name = "postgres"
+  db_name = "bwago_development"
 
   # SSL mode for the PostgreSQL connection
   ssl_mode = "disable"
@@ -66,3 +66,32 @@ module "terraform-vault-postgresql-roles" {
 
 
 }
+
+# postgres=# \c bwago_development;
+# You are now connected to database "bwago_development" as user "postgres".
+# bwago_development=# CREATE TABLE table1 (
+#   id SERIAL PRIMARY KEY,
+#   name TEXT NOT NULL,
+#   created_at TIMESTAMP DEFAULT NOW()
+# );
+# CREATE TABLE
+# bwago_development=# CREATE TABLE table2 (
+#   id SERIAL PRIMARY KEY,
+#   name TEXT NOT NULL,
+#   created_at TIMESTAMP DEFAULT NOW()
+# );
+# CREATE TABLE
+# bwago_development=# CREATE TABLE table3 (
+#   id SERIAL PRIMARY KEY,
+#   name TEXT NOT NULL,
+#   created_at TIMESTAMP DEFAULT NOW()
+# );
+# CREATE TABLE
+# bwago_development=# CREATE TABLE table4 (
+#   id SERIAL PRIMARY KEY,
+#   name TEXT NOT NULL,
+#   created_at TIMESTAMP DEFAULT NOW()
+# );
+# CREATE TABLE
+# bwago_development=# \l
+# bwago_development=# exit

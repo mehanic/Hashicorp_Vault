@@ -1,9 +1,9 @@
 # Cert Auth Backend
-resource "vault_auth_backend" "cert" {
-  //path = "cert"
-  path = var.cert_auth_mount_path
-  type = "cert"
-}
+# resource "vault_auth_backend" "cert" {
+#   //path = "cert"
+#   path = var.cert_auth_mount_path
+#   type = "cert"
+# }
 
 
 # openssl genrsa -out root-key.pem 4096

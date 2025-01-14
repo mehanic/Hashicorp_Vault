@@ -29,3 +29,9 @@ output "kv_secret_data" {
   value       = module.terraform-vault-pki-request-certificate-from-existing.kv_secret_data
   sensitive   = true
 }
+
+//vault secrets enable -path=pki_root_ca pki
+//vault write pki_root_ca/root/generate/internal common_name="Root CA" ttl=87600h
+//vault write pki_root_ca/config/issuers/default issuer_ref="<issuer-ref>"
+//vault list pki_root_ca/issuers
+//vault secrets enable -path=kvv2 kv-v2
