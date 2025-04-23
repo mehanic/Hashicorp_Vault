@@ -1,0 +1,10 @@
+concurrent = 1
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+    executor = "shell"
+    url = "https://gitlab.com"
+    token = "51xbx6LiMmsw-q4bdpAS"

@@ -1,0 +1,13 @@
+
+# kubernetes auth config
+vault write auth/kubernetes/config \
+        kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+        token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+        kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
+        issuer="https://kubernetes.default.svc.cluster.local"
+
+
+# getting the issuer string
+# use "fg" and Ctrl+C afterwards, to stop the "kubectl proxy" command
+kubectl proxy &
+curl --silent http://127.0.0.1:8001/.well-known/openid-configuration | jq -r .issuer

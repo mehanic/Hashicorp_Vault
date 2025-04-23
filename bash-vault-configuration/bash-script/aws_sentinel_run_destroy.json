@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "is-destroy":true,
+      "message": "api destroy"
+    },
+    "type":"runs",
+    "relationships": {
+      "workspace": {
+        "data": {
+          "type": "workspaces",
+          "id": "ws-WGpov4PBKLt323Ep"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+server:
+  affinity: ""
+  ha:
+    enabled: true
+  #extraVolumes:
+  #  - name: vault-seal-config
+  #    type: secret
+  #extraArgs: "-config=/vault/userconfig/vault-seal-config/vault-seal.hcl"
+    

@@ -1,0 +1,32 @@
+# Command for testing users against Vault only
+VAULT_TOKEN=$(vault login \
+-field=token -method=userpass \
+username=plan-user password=password) \
+vault read aws/creds/terraform-plan
+
+# These are used in the final clip of the demo, once AWS & Vault have been configured
+
+# Works
+VAULT_TOKEN=$(vault login -field=token -method=userpass username=plan-user password=password) \
+TF_VAR_AWS_CREDS_ROLE=terraform-plan \
+terraform plan
+
+# Works
+VAULT_TOKEN=$(vault login -field=token -method=userpass username=apply-user password=password) \
+TF_VAR_AWS_CREDS_ROLE=terraform-apply \
+terraform apply
+
+# Works
+VAULT_TOKEN=$(vault login -field=token -method=userpass username=apply-user password=password) \
+TF_VAR_AWS_CREDS_ROLE=terraform-apply \
+terraform destroy
+
+# Fails - not enough AWS permissions to apply changes, only plan (trying to "apply" using the read-only IAM policy)
+VAULT_TOKEN=$(vault login -field=token -method=userpass username=plan-user password=password) \
+TF_VAR_AWS_CREDS_ROLE=terraform-plan \
+terraform apply
+
+# Fails - accessing forbidden secrets (plan-user accessing forbidden terraform-apply role)
+VAULT_TOKEN=$(vault login -field=token -method=userpass username=plan-user password=password) \
+TF_VAR_AWS_CREDS_ROLE=terraform-apply \
+terraform apply 

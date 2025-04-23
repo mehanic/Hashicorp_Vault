@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: carved-rock-app
+  labels:
+    app: carved-rock-app
+spec:
+  serviceAccountName: carved-rock-app
+  containers:
+  - image: ubuntu
+    command:
+      - "sleep"
+      - "604800"
+    imagePullPolicy: IfNotPresent
+    name: carved-rock-app
+  restartPolicy: Always

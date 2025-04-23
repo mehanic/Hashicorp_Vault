@@ -1,0 +1,69 @@
+---
+- hosts: vault-server
+  remote_user: ubuntu
+  become: yes 
+  tasks:
+  - name: Adicionando as chaves do repo Hashicorp
+    apt_key: 
+      url: https://apt.releases.hashicorp.com/gpg
+      state: present
+
+  - name: Add Hashicorp Vault Repo
+    shell: sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+  - name: Install Vault
+    apt:
+      name: vault
+      update_cache: yes
+
+  - name: Stop Vault Service
+    service:
+      name: vault
+      state: stopped
+
+  - name: Copy vault config to server
+    copy: src=vault.hcl dest=/etc/vault.d/vault.hcl
+
+  - name: Start Vault Service
+    service:
+      name: vault
+      state: started
+      enabled: yes
+  
+  - name: Insert VAULT_ADDR in to /etc/environment
+    lineinfile:
+      path: /etc/environment
+      line: VAULT_ADDR="http://0.0.0.0:8200"
+
+  - name: Insert VAULT_ADDR in to /etc/profile
+    lineinfile:
+      path: /etc/profile
+      line: export VAULT_ADDR="http://0.0.0.0:8200"
+
+  - name: Reboot machine
+    reboot:
+      msg: "Reinicialização iniciada por Ansible"
+
+  - name: Vault Init
+    shell: vault operator init > /etc/vault.d/key.txt
+    
+  - name: Unseal Vault
+    shell: vault operator unseal $(grep '{{ item }}' /etc/vault.d/key.txt | awk '{print $NF}')
+    with_items:
+      - Key 1
+      - Key 2
+      - Key 3
+
+  - name: Copy Keys to Local machine
+    fetch:
+      src: /etc/vault.d/key.txt
+      dest: .
+
+  # Enable if you want delete key file from server
+  # - name: Remove file (delete file)
+  #   file:
+  #     path: /etc/vault.d/key.txt
+  #     state: absent
+
+  
+  

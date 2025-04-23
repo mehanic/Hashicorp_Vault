@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowUserToGetThereOwnUserObject",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetUser"
+            ],
+            "Resource": [
+                "arn:aws:iam::[YOUR ACCOUNT NUMBER HERE]:user/${aws:username}"
+            ]
+        }
+    ]
+}
